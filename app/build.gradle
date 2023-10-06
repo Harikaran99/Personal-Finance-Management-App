@@ -1,0 +1,48 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 33
+
+    defaultConfig {
+        applicationId "protect.budgetwatch"
+        minSdkVersion 23
+        targetSdkVersion 33
+        versionCode 30
+        versionName "0.22"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+        debug {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+
+    // Starting with Android Studio 3 Robolectric is unable to find resources.
+    // The following allows it to find the resources.
+    testOptions {
+        unitTests {
+            includeAndroidResources = true
+        }
+    }
+    namespace 'protect.budgetwatch'
+    lint {
+        disable 'GoogleAppIndexingWarning', 'ButtonStyle', 'IconDipSize', 'AlwaysShowAction', 'InflateParams', 'MissingTranslation'
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation 'androidx.appcompat:appcompat:1.0.0'
+    implementation 'com.google.android.material:material:1.0.0'
+    implementation 'org.apache.commons:commons-csv:1.5'
+    implementation group: 'com.google.guava', name: 'guava', version: '20.0'
+    implementation 'com.github.apl-devs:appintro:v4.2.0'
+    testImplementation 'junit:junit:4.12'
+    testImplementation "org.robolectric:robolectric:4.9"
+    testImplementation group: 'org.javatuples', name: 'javatuples', version: '1.2'
+}
